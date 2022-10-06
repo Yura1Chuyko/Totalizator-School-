@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PlayerName</fullName>
+    <columns>NAME</columns>
+    <columns>Name__c</columns>
+    <columns>Is_Black_List__c</columns>
+    <columns>Email__c</columns>
+    <columns>Total_Money_Won__c</columns>
+    <columns>Risk_Level__c</columns>
+    <filterScope>Mine</filterScope>
+    <label>PlayerName</label>
+</ListView>

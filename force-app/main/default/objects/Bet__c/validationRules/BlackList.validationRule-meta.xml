@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BlackList</fullName>
+    <active>true</active>
+    <description>Do not create the bet for a player in the blacklist.</description>
+    <errorConditionFormula>(Player__r.Is_Black_List__c) &amp;&amp; ISNEW()</errorConditionFormula>
+    <errorMessage>Bet cannot be created for the player in the blacklist.</errorMessage>
+</ValidationRule>

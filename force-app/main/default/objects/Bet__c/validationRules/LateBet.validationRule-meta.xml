@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LateBet</fullName>
+    <active>true</active>
+    <description>Forbid creation of the bet after the game is started.</description>
+    <errorConditionFormula>(Game__r.Start_Date__c &lt;  NOW() ) &amp;&amp;  ISNEW()</errorConditionFormula>
+    <errorMessage>Bet cannot be created after the start of the Game.</errorMessage>
+</ValidationRule>
