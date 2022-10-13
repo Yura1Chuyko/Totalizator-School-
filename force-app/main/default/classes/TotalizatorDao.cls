@@ -1,7 +1,7 @@
 //-------------------SOQL-------------------//
 public class TotalizatorDao {
-    public static  List<Player__c> getPlayers(Integer limitNumber, Integer offset){
-        List<Player__c> players = [SELECT Name,Name__c FROM Player__c WHERE Is_Black_List__c = false LIMIT :limitNumber OFFSET :offset];
+    public static List<Player__c> getPlayers(Integer limitNumber, Integer offset){
+        List<Player__c> players = [SELECT Id,Name,Name__c FROM Player__c WHERE Is_Black_List__c = false LIMIT :limitNumber OFFSET :offset];
         return players;
     }
     
@@ -44,29 +44,5 @@ public class TotalizatorDao {
             popularGames.put(game.Id,betsSize);
         }     
         return popularGames;
-    }
-    //-------------------DML-------------------//   
-    public static void createPlayer(String playerName, String playerEmail){
-       Player__c player = new Player__c(Name__c = playerName,Email__c = playerEmail);
-        Database.insert(player);
-    }
-    public static void updateBet(Id betId, Decimal amount, Decimal percent){
-        if ( (amount != null) || (percent != null) ){
-            Bet__c bet = new Bet__c(Id = betId);
-            if (amount != null){
-                bet.Amount__c = amount;
-            }
-            if(percent != null){
-                bet.Win_Rate__c = percent;
-            }
-            Database.update(bet);
-        }
-    }
-    public static void deleteBets(List<Id> betIds){
-        Database.delete(betIds);
-    }
-    public static void createBet(Id game, Id player, Decimal amount, Decimal winRate){
-        Bet__c bet = new Bet__c(Game__c = game, Player__c = player, Amount__c = amount, Win_Rate__c = winRate, Status__c = 'Pending');
-        Database.insert(bet);
     }
 }

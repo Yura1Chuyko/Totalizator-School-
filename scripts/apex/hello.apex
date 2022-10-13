@@ -4,5 +4,5 @@
 //     SFDX: Execute Anonymous Apex with Currently Selected Text
 // You can also execute the entire file by running the command:
 //     SFDX: Execute Anonymous Apex with Editor Contents
-List<Id> betIds = new List<Id>{'a027Q000003STfFQAW'};
-TotalizatorDao.deleteBets(betIds);
+Map<Id,Integer> bestGames = TotalizatorDao.getMostPopularGames();
+System.debug(bestGames);
