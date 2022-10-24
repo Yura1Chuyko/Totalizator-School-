@@ -5,12 +5,7 @@ public class TotalizatorDao {
         return players;
     }
     
-    public static  List<AggregateResult> getGamesCount(){
-        List<AggregateResult> countGames = [SELECT COUNT(Id) FROM Game__c];
-        return countGames;
-    }
-    
-    public static  Integer getGamesCount2(){
+    public static  Integer getGamesCount(){
         Integer countGames = [SELECT COUNT() FROM Game__c];
         return countGames;
     }
@@ -40,8 +35,7 @@ public class TotalizatorDao {
         List<Game__c> gamesWithBets = [SELECT Id,(Select Id FROM Bets__r) FROM Game__c];
         Map<Id,Integer> popularGames = new Map<Id,Integer>();
         for(Game__c game : gamesWithBets){
-            Integer betsSize = game.Bets__r.size();
-            popularGames.put(game.Id,betsSize);
+            popularGames.put(game.Id,game.Bets__r.size());
         }     
         return popularGames;
     }
@@ -63,7 +57,7 @@ public class TotalizatorDao {
         }
     }
     public static void deleteBets(List<Id> betIds){
-        Database.delete([SELECT Id,Name FROM Bet__c WHERE Id = :betIds]);
+        Database.delete(betIds);
     }
     public static void createBet(Id game, Id player, Decimal amount, Decimal winRate){
         Bet__c bet = new Bet__c(Game__c = game, Player__c = player,Amount__c = amount , Win_Rate__c = winRate,Status__c = 'Pending');

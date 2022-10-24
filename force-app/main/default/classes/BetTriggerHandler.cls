@@ -21,13 +21,11 @@ public class BetTriggerHandler {
         for(Bet__c bet : newBets) {
             gameIds.add(bet.Game__c);
         }
-        List<Game__c> gamesWithBets = [SELECT Id, (SELECT Amount__c, Status__c FROM Bets__r) FROM Game__c WHERE Id IN :gameIds ];
+        List<Game__c> gamesWithBets = [SELECT Id, (SELECT Amount__c, Status__c FROM Bets__r WHERE Status__c = 'Lost') FROM Game__c WHERE Id IN :gameIds ];
         for(Game__c game : gamesWithBets){
             game.Total_Income__c = 0;
             for(Bet__c bet : game.Bets__r){
-                if(bet.Status__c == 'Lost'){
                     game.Total_Income__c += bet.Amount__c;
-                }
             }
         }
 		update gamesWithBets;
