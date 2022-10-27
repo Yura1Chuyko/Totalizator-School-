@@ -1,5 +1,5 @@
-import { LightningElement, wire} from 'lwc';
-import getBetsList from '@salesforce/apex/StatusWon/getBetsList';
+import { LightningElement, api, wire} from 'lwc';
+import getBetsByPlayerIds from '@salesforce/apex/StatusWonController.getBetsByPlayerIds';
 
 
 const columns = [
@@ -11,7 +11,8 @@ const columns = [
 export default class StatusWonRelated extends LightningElement {
     error;
     columns=columns;
+    @api recordId;
 
-    @wire(getBetsList)
-    data;
+    @wire(getBetsByPlayerIds, {playerRecordId: '$recordId'})
+    bets;
 }
